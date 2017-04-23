@@ -20,7 +20,7 @@ npm i multipart_write_stream -S
 ### addPart
 return Promse
 
-
+```js
 let stream = new multipartStream({
     boundary: "cooder"
 });
@@ -62,7 +62,7 @@ stream.addPart({
 }).catch(function(error) {
     logger.error('failed:%s', error.stack);
 });
-
+```
 ## License
 
 The [MIT License](LICENSE)
