@@ -1,0 +1,19 @@
+{
+    "name": "express-autoload-router",
+    "version": "1.0.3",
+    "description": "auto create routers from specified folder for Express.js",
+    "author": "imcooder <imcooder@gmail.com>",
+    "license": "MIT",
+    "repository": "git@github.com:imcooder/express-autoload-router",    
+    "dependencies": {
+        "glob": "^7.1.1",
+        "underscore": "^1.8.3"
+    },
+    "devDependencies": {
+        "eslint": "^3.6.1",
+        "eslint-config-airbnb": "^12.0.0",
+        "eslint-plugin-import": "^1.16.0",
+        "eslint-plugin-jsx-a11y": "^2.2.2",
+        "eslint-plugin-react": "^6.3.0"
+    }
+}
