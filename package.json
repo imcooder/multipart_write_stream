@@ -1,6 +1,6 @@
 {
     "name": "multipart-write-stream",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "multipart write stream",
     "author": "imcooder <imcooder@gmail.com>",
     "license": "MIT",
