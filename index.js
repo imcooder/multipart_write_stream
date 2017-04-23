@@ -1,4 +1,3 @@
-var Sandwich = require('sandwich-stream').SandwichStream
 var stream = require('stream')
 var inherits = require('inherits')
 var isStream = require('is-stream')
@@ -29,7 +28,7 @@ function MultipartStream(options) {
     this.writing = false;
     this.firstStream = true;
     self._head = '--' + this._boundary + NEWLINE;
-    self._tail=  NEWLINE + '--' + this._boundary + '--';
+    self._tail = NEWLINE + '--' + this._boundary + '--';
     self._separator = NEWLINE + '--' + this._boundary + NEWLINE;
 }
 util.inherits(MultipartStream, stream.Stream);
@@ -79,7 +78,7 @@ MultipartStream.prototype.end = function() {
     self._pushTail();
     self.eof = true;
     self.readable = false;
-    self.emit('end');  
+    self.emit('end');
 };
 
 MultipartStream.prototype._read = function() {
@@ -113,7 +112,7 @@ MultipartStream.prototype._emitStream = function(cb) {
     let streamStub = self._streams.shift();
     console.log('stream:%s begin', streamStub.id);
     self.writing = true;
-    streamStub.stream.pipe(self, {end: false});
+    streamStub.stream.pipe(self, { end: false });
     streamStub.stream.on('end', (function handleFileEnd() {
         console.log('stream:%s end', streamStub.id);
         if (streamStub.resolve) {
@@ -125,21 +124,21 @@ MultipartStream.prototype._emitStream = function(cb) {
     }).bind(this));
     streamStub.stream.resume();
 };
-MultipartStream.prototype._pushHeader = function () {
+MultipartStream.prototype._pushHeader = function() {
     let self = this;
     if (self._head) {
         self.emit('data', self._head);
     }
 };
 
-MultipartStream.prototype._pushSeparator = function () {
+MultipartStream.prototype._pushSeparator = function() {
     let self = this;
     if (self._separator) {
         self.emit('data', self._separator);
     }
 };
 
-MultipartStream.prototype._pushTail = function () {
+MultipartStream.prototype._pushTail = function() {
     let self = this;
     if (self._tail) {
         self.emit('data', self._tail);
@@ -148,14 +147,14 @@ MultipartStream.prototype._pushTail = function () {
 MultipartStream.prototype.makePartStream = function(part) {
     part = part || {};
     var partStream = new stream.PassThrough();
-    if(part.headers) {
-        for(let key in part.headers) {
+    if (part.headers) {
+        for (let key in part.headers) {
             let header = part.headers[key];
             partStream.write(key + ': ' + header + NEWLINE);
         }
     }
     partStream.write(NEWLINE);
-    if(isStream(part.body)) {
+    if (isStream(part.body)) {
         part.body.pipe(partStream);
     } else {
         partStream.end(part.body);
@@ -166,14 +165,14 @@ MultipartStream.prototype.addPart = function(part) {
     let self = this;
     part = part || {}
     var partStream = new stream.PassThrough()
-    if(part.headers) {
-        for(let key in part.headers) {
+    if (part.headers) {
+        for (let key in part.headers) {
             let header = part.headers[key];
             partStream.write(key + ': ' + header + NEWLINE);
         }
     }
     partStream.write(NEWLINE);
-    if(isStream(part.body)) {
+    if (isStream(part.body)) {
         part.body.pipe(partStream);
     } else {
         partStream.end(part.body);
