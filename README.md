@@ -4,16 +4,16 @@
 [![npm download][download-image]][download-url]
 [![David deps][david-image]][david-url]
 
-[npm-image]: https://img.shields.io/npm/v/multipart_write_stream.svg
-[npm-url]: https://npmjs.com/package/multipart_write_stream
-[download-image]: https://img.shields.io/npm/dm/multipart_write_stream.svg
-[download-url]: https://npmjs.com/package/multipart_write_stream
-[david-image]: https://img.shields.io/david/imcooder/multipart_write_stream.svg
-[david-url]: https://david-dm.org/imcooder/multipart_write_stream
+[npm-image]: https://img.shields.io/npm/v/multipart-write-stream.svg
+[npm-url]: https://npmjs.com/package/multipart-write-stream
+[download-image]: https://img.shields.io/npm/dm/multipart-write-stream.svg
+[download-url]: https://npmjs.com/package/multipart-write-stream
+[david-image]: https://img.shields.io/david/imcooder/multipart-write-stream.svg
+[david-url]: https://david-dm.org/imcooder/multipart-write-stream
 
 ## Install
 ```
-npm i multipart_write_stream -S
+npm i multipart-write-stream -S
 ```
 
 ## Usage
