@@ -63,6 +63,7 @@ stream.addPart({
     logger.error('failed:%s', error.stack);
 });
 ```
+body: string array or stream
 ## License
 
 The [MIT License](LICENSE)

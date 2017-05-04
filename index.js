@@ -1,6 +1,7 @@
-var stream = require('stream')
-var inherits = require('inherits')
-var isStream = require('is-stream')
+/*jshint esversion: 6 */
+var stream = require('stream');
+var inherits = require('inherits');
+var isStream = require('is-stream');
 var util = require('util');
 var _ = require('underscore');
 var number = 0;
@@ -18,7 +19,7 @@ var CONTENT_TYPE_LENGTH = CONTENT_TYPE.length - 2;
 function MultipartStream(options) {
     options = options || {};
     let self = this;
-    this._boundary = options.boundary || 'SuperSweetSpecialBoundaryShabam';
+    this._boundary = options.boundary || '__boundary_cooder__';
     this._streams = [];
     this.readable = true;
     this.writable = true;
@@ -74,6 +75,7 @@ MultipartStream.prototype.write = function(data) {
 };
 
 MultipartStream.prototype.end = function() {
+    console.log('stream end');
     let self = this;
     self._pushTail();
     self.eof = true;
@@ -126,6 +128,7 @@ MultipartStream.prototype._emitStream = function(cb) {
 };
 MultipartStream.prototype._pushHeader = function() {
     let self = this;
+    console.log('stream:pushHeader');
     if (self._head) {
         self.emit('data', self._head);
     }
@@ -133,6 +136,7 @@ MultipartStream.prototype._pushHeader = function() {
 
 MultipartStream.prototype._pushSeparator = function() {
     let self = this;
+    console.log('stream:pushSeparator');
     if (self._separator) {
         self.emit('data', self._separator);
     }
@@ -140,6 +144,7 @@ MultipartStream.prototype._pushSeparator = function() {
 
 MultipartStream.prototype._pushTail = function() {
     let self = this;
+    console.log('stream:pushTail');
     if (self._tail) {
         self.emit('data', self._tail);
     }
@@ -163,8 +168,8 @@ MultipartStream.prototype.makePartStream = function(part) {
 };
 MultipartStream.prototype.addPart = function(part) {
     let self = this;
-    part = part || {}
-    var partStream = new stream.PassThrough()
+    part = part || {};
+    var partStream = new stream.PassThrough();
     if (part.headers) {
         for (let key in part.headers) {
             let header = part.headers[key];
@@ -177,8 +182,8 @@ MultipartStream.prototype.addPart = function(part) {
     } else {
         partStream.end(part.body);
     }
-    return self.addStream(partStream)
-}
+    return self.addStream(partStream);
+};
 
 
 module.exports = MultipartStream;
