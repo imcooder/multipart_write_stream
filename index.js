@@ -19,7 +19,7 @@ var CONTENT_TYPE_LENGTH = CONTENT_TYPE.length - 2;
 function MultipartStream(options) {
     options = options || {};
     let self = this;
-    this._boundary = options.boundary || '__boundary_cooder__';
+    this._boundary = options.boundary || 'SuperSweetSpecialBoundaryShabam';
     this._streams = [];
     this.readable = true;
     this.writable = true;
@@ -28,6 +28,7 @@ function MultipartStream(options) {
     this.eof = false;
     this.writing = false;
     this.firstStream = true;
+    this.hasSplited = false;
     self._head = NEWLINE + '--' + this._boundary + NEWLINE;
     self._tail = NEWLINE + '--' + this._boundary + '--';
     self._separator = NEWLINE + '--' + this._boundary + NEWLINE;
@@ -108,8 +109,9 @@ MultipartStream.prototype._emitStream = function(cb) {
     if (self.firstStream) {
         self._pushHeader();
         self.firstStream = false;
-    } else {
+    } else if (!self.hasSplited){
         self._pushSeparator();
+        self.hasSplited = true;
     }
     let streamStub = self._streams.shift();
     console.log('stream:%s begin', streamStub.id);
@@ -122,6 +124,8 @@ MultipartStream.prototype._emitStream = function(cb) {
         }
         self.writing = false;
         self.emit('data', NEWLINE);
+        self._pushSeparator();
+        self.hasSplited = true;
         cb();
     }).bind(this));
     streamStub.stream.resume();
