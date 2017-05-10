@@ -28,7 +28,7 @@ function MultipartStream(options) {
     this.eof = false;
     this.writing = false;
     this.firstStream = true;
-    self._head = '--' + this._boundary + NEWLINE;
+    self._head = NEWLINE + '--' + this._boundary + NEWLINE;
     self._tail = NEWLINE + '--' + this._boundary + '--';
     self._separator = NEWLINE + '--' + this._boundary + NEWLINE;
 }
