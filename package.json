@@ -6,6 +6,7 @@
     "license": "MIT",
     "repository": "git@github.com:imcooder/multipart_write_stream",
     "dependencies": {
+        "delayed-stream": "^1.0.0",
         "fs": "0.0.1-security",
         "glob": "^7.1.1",
         "inherits": "^2.0.3",
