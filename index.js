@@ -7,7 +7,6 @@
 const util = require('util');
 const stream = require('stream');
 const isStream = require('is-stream');
-const delayedStream = require('delayed-stream');
 const _ = require('underscore');
 
 const NEWLINE = '\r\n';

@@ -2,8 +2,6 @@
 /* jshint node:true */
 /* jshint esversion:6 */
 
-const path = require('path');
-const loadRouter = require('..');
 const multipartStream = require('../index');
 const {
     PassThrough
