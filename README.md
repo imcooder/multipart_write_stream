@@ -27,6 +27,9 @@ let stream = new multipartStream({
 stream.pipe(process.stdout, {
     end: false
 });
+stream.on('finish', () => {
+        console.log('all finish');
+});
 let data = [{
         key: "test",
     },
@@ -50,6 +53,19 @@ for (let i = 0; i < data.length - 1; i++) {
         console.error('response failed:%s', error.stack);
     });
 }
+let delayStream = new PassThrough();
+setTimeout(() => {
+    delayStream.end('delay stream test');
+}, 5000);
+stream.addPart({
+    headers: {
+        'Content-Disposition': 'form-data; name=metadata',
+        'Content-Type': 'application/json; charset=utf-8',
+    },
+    body: delayStream,
+}).then(() => {
+    // console.log('stream write finish');
+});
 stream.addPart({
     headers: {
         'Content-Disposition': 'form-data; name=metadata',
@@ -57,9 +73,8 @@ stream.addPart({
     },
     body: JSON.stringify(data[data.length - 1]),
 }).then(function() {
-    stream.end(); //all end
     console.debug('success');
-}).catch(function(error) {
+}, true).catch(function(error) {
     logger.error('failed:%s', error.stack);
 });
 ```
