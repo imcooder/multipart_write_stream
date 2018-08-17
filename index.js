@@ -136,7 +136,7 @@ module.exports = class MultipartStream extends stream.Stream {
             return;
         }
         if (self._streams.length > 0) {
-            self._emitStream(self._read.bind(self));
+            self.next();
         } else {
             // 继续等待input 不结束
             //self.end();
@@ -254,7 +254,7 @@ module.exports = class MultipartStream extends stream.Stream {
         }
 
         let p = self.addStream(partStream);
-        this._appendString(NEWLINE);
+        // this._appendString(NEWLINE);
         if (!last) {
             this._appendSeparator();
         } else {
